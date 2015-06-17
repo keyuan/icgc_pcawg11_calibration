@@ -55,13 +55,16 @@ GetIdentityArrayFromProbabilities<-function(node.probabilities,max.array.size = 
 		for(i in 1:no.arrays){
 			for(j in 1:no.arrays){
 				#matrix cross product
-				identity.strengths[[(i-1)*no.arrays +j]] = node.probabilities[((i-1)*max.array.size+1):min(no.muts,i*max.array.size),] %*% t(node.probabilities[((j-1)*max.array.size+1):min(no.muts,j*max.array.size),])
+				#identity.strengths[[(i-1)*no.arrays +j]] = node.probabilities[((i-1)*max.array.size+1):min(no.muts,i*max.array.size),] %*% t(node.probabilities[((j-1)*max.array.size+1):min(no.muts,j*max.array.size),])
+				identity.strengths[[(i-1)*no.arrays +j]] = tcrossprod(node.probabilities[((i-1)*max.array.size+1):min(no.muts,i*max.array.size),], node.probabilities[((j-1)*max.array.size+1):min(no.muts,j*max.array.size),])
 			}
 		}			
 
 	}else{
-		#matrix cross product
-		identity.strengths = node.probabilities %*% t(node.probabilities)
+		
+	  identity.strengths = tcrossprod(node.probabilities) # ke 
+	  #matrix cross produc
+		#identity.strengths = node.probabilities %*% t(node.probabilities)
 	}
 	return(identity.strengths)
 }
