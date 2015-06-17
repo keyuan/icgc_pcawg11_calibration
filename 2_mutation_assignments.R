@@ -5,7 +5,7 @@ ploidy <- read.delim("1_purity_ploidy/ploidy.tsv",
 
 samples <- ploidy$sample
 
-for (ii in 39:length(samples)) {
+for (ii in seq_along(samples)) {
   samplename = samples[ii]
   print(samplename)
   #samplename = "569393c8-e2fe-4580-a45b-81f1b1e01135"
